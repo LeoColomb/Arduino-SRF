@@ -1,0 +1,24 @@
+#######################################
+# Syntax Coloring Map For Morse
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+SonarSRF08	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+connect	KEYWORD2
+sendCommand	KEYWORD2
+setUnit	KEYWORD2
+setRegister	KEYWORD2
+readData	KEYWORD2
+changeAddress	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
