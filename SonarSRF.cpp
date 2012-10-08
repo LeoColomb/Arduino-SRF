@@ -5,18 +5,7 @@
         By Philipp A. Mohrenweiser Okt 08 2012
 */
 
-// include Wire library to read and write I2C commands:
-#include "Wire.h"
 #include "SonarSRF.h"
-
-#define readInches 0x50
-#define readCentimeters 0x51
-#define readMicroSeconds 0x52
-#define CommandRegister 0x00
-#define ResultRegister 0x02
-#define ResultRegister 0x02
-
-// Initialize Wires
 
 void SonarSRF::connect(int address){
     _address = address;
@@ -36,8 +25,6 @@ void SonarSRF::sendBasicCommand(int command){
 	Wire.write(CommandRegister); // SRF02 Location 0
 	Wire.write(command); // SRF02 Command
 	// end I2C transmission
-    //Wire.write(0x00);
-    //Wire.write(0xFF);
 	Wire.endTransmission();
 }
 
@@ -97,26 +84,25 @@ void SonarSRF::waitForCompletion(){
         result = getSoft();
         delay(2);
     }
-
 }
+
 int SonarSRF::getSoft(){  // Function to get software revision
   
-  Wire.beginTransmission(_address);             // Begin communication with the SRF module
-  Wire.write(CommandRegister);                             // Sends the command bit, when this bit is read it returns the software revision
-  Wire.endTransmission();
-  
-  Wire.requestFrom(_address, 1);                // Request 1 byte
-  while(Wire.available() < 0);                    // While byte available
-  int software = Wire.read();                  // Get byte
-    
-  return(software);                               
+    Wire.beginTransmission(_address);   // Begin communication with the SRF module
+    Wire.write(CommandRegister);        // Sends the command bit, when this bit is read it returns the software revision
+    Wire.endTransmission();
+
+    Wire.requestFrom(_address, 1);      // Request 1 byte
+    while(Wire.available() < 0);        // While byte available
+    int software = Wire.read();         // Get byte
+
+    return(software);                               
   
 }
-// Optional change Address -
-// NEW_ADDRESS can be set to any of E0, E2, E4, E6, E8, EA, EC, EE
-// F0, F2, F4, F6, F8, FA, FC, FE
 /**
  * The address given in arduino 7bit has to be converted back into SRF 8bit
+ * NEW_ADDRESS << 1 can be set to any of E0, E2, E4, E6, E8, EA, EC, EE
+ * F0, F2, F4, F6, F8, FA, FC, FE
  */
 void SonarSRF::changeAddress(int NEW_ADDRESS){
     SonarSRF::sendBasicCommand(0xA0);

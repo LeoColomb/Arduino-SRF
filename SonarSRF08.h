@@ -8,14 +8,12 @@
 #ifndef SonarSRF08_h
 #define SonarSRF08_h
 
-#include "Arduino.h"
 #include "SonarSRF.h"
 
 class SonarSRF08 : public SonarSRF 
 {
 public:
     void startRanging(char unit);
-    void waitForCompletion();
 };
 
 #endif

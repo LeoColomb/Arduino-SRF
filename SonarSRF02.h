@@ -8,7 +8,6 @@
 #ifndef SonarSRF02_h
 #define SonarSRF02_h
 
-#include "Arduino.h"
 #include "SonarSRF.h"
 
 class SonarSRF02 : public SonarSRF 
