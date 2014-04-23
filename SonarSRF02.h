@@ -1,17 +1,20 @@
-/*
-	SonarSRF08.h - library for controlling SRF0x sonar sensors
-		By Zach Foresta April 10, 2009
-		By Leo Colomb May 10, 2012
-        By Philipp A. Mohrenweiser Okt 08 2012
-*/
+//
+// SonarSRF
+// Arduino Library for controlling SRF sonar sensors
+// http://www.arduino.cc/playground/Main/SonarSrf08
+//
+// MIT License
+// Copyright(c) 2009 Zach Foresta
+// Copyright(c) 2012 Leo Colombaro
+// Copyright(c) 2012 Philipp A. Mohrenweiser
+//
 
 #ifndef SonarSRF02_h
 #define SonarSRF02_h
 
 #include "SonarSRF.h"
 
-class SonarSRF02 : public SonarSRF 
-{
+class SonarSRF02 : public SonarSRF {
 public:
     void waitForCompletion();
 };

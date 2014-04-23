@@ -1,51 +1,44 @@
-/*
-* SRF0X.ino - example interfacing with sonar sensor SRF02 and SRF08
-*	library uses Wire.h 
-*		SDA - Analog Pin 4
-*		SCL - Analog Pin 5
-*
-* Authors:
-*	- Zach Foresta - Foureza87@yahoo.com (April 2009)
-*	- Leo Colomb - @LeoColomb (May 2012)
-*   - Philipp A. Mohrenweiser @phiamo (Okt 2012)
-*
-* For component setup - http://www.arduino.cc/playground/Main/SonarSrf08
-*/
+//
+// SonarSRF
+// Arduino Library for controlling SRF sonar sensors
+// http://www.arduino.cc/playground/Main/SonarSrf08
+//
+// MIT License
+// Copyright(c) 2009 Zach Foresta
+// Copyright(c) 2012 Leo Colombaro
+// Copyright(c) 2012 Philipp A. Mohrenweiser
+//
 
 #include <Wire.h>
 #include <SonarSRF02.h>
 #include <SonarSRF08.h>
 
-
-#define leftAddress ( 0xF2 >> 1) // I2C-BUS-Adresse des SRF02. Da der Arduino eine 7-Bit Adresse erwartet, muss ein Bit nach rechts geschoben werden.
-#define rightAddress ( 0xE0 >> 1) // I2C-BUS-Adresse des SRF02. Da der Arduino eine 7-Bit Adresse erwartet, muss ein Bit nach rechts geschoben werden.
-#define mainAddress ( 0xF8 >> 1) // I2C-BUS-Adresse des SRF02. Da der Arduino eine 7-Bit Adresse erwartet, muss ein Bit nach rechts geschoben werden.
+#define leftAddress ( 0xF2 >> 1)
+#define rightAddress ( 0xE0 >> 1)
+#define mainAddress ( 0xF8 >> 1)
 SonarSRF02 LeftSonar;
 SonarSRF02 RightSonar;
 SonarSRF08 MainSonar;
 
 char unit = 'c'; // 'i' for inches, 'c' for centimeters, 'm' for micro-seconds
 
-void setup()
-{
+void setup() {
     Serial.begin(115200);
-    
-    LeftSonar.connect(leftAddress);  
+
+    LeftSonar.connect(leftAddress);
     Serial.println("Left SRF02 US-Sensor ");
     Serial.println(LeftSonar.getSoft());
-    
-    RightSonar.connect(rightAddress);  
+
+    RightSonar.connect(rightAddress);
     Serial.println("Right SRF02 US-Sensor ");
     Serial.println(RightSonar.getSoft());
-    
-    MainSonar.connect(mainAddress);  
+
+    MainSonar.connect(mainAddress);
     Serial.println("Main SRF08 US-Sensor ");
     Serial.println(MainSonar.getSoft());
-  
 }
 
-void loop ()
-{
+void loop() {
     float sensorReading = 0;
 
     sensorReading = LeftSonar.getRange(unit);

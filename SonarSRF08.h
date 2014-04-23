@@ -1,6 +1,6 @@
 //
-// SonarSRF08.h
-// Library for controlling SRF08 sonar sensors
+// SonarSRF
+// Arduino Library for controlling SRF sonar sensors
 // http://www.arduino.cc/playground/Main/SonarSrf08
 //
 // MIT License
@@ -14,8 +14,7 @@
 
 #include "SonarSRF.h"
 
-class SonarSRF08 : public SonarSRF
-{
+class SonarSRF08 : public SonarSRF {
 public:
     void startRanging(char unit);
 };

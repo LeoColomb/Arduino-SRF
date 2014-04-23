@@ -1,6 +1,6 @@
 //
-// SonarSRF08.h
-// Library for controlling SRF08 sonar sensors
+// SonarSRF
+// Arduino Library for controlling SRF sonar sensors
 // http://www.arduino.cc/playground/Main/SonarSrf08
 //
 // MIT License
@@ -9,17 +9,10 @@
 // Copyright(c) 2012 Philipp A. Mohrenweiser
 //
 
-// Sensor connections:
-// * SDA - Analog pin 4
-// * SCL - Analog pin 5
-
-
 #include "SonarSRF08.h"
 
-/**
- * Additional commands for gain and range
- */
-void SonarSRF08::startRanging(char unit){
+// Additional commands for gain and range
+void SonarSRF08::startRanging(char unit) {
     // start I2C transmission
     Wire.beginTransmission(_address);
     // send command
@@ -29,10 +22,8 @@ void SonarSRF08::startRanging(char unit){
     Wire.endTransmission();
 }
 
-
 // Sets Units for display / storage
-
-void SonarSRF08::setUnit(int commandRegister, int address, char units, int gainRegister, int rangeLocation){
+void SonarSRF08::setUnit(int commandRegister, int address, char units, int gainRegister, int rangeLocation) {
     switch (units) {
     case 'i':;
         SonarSRF08::sendCommand(commandRegister, address, 0x50, gainRegister, rangeLocation);
@@ -50,8 +41,7 @@ void SonarSRF08::setUnit(int commandRegister, int address, char units, int gainR
 }
 
 // Set to read off the register with stored result
-
-void SonarSRF08::setRegister(int address, int thisRegister){
+void SonarSRF08::setRegister(int address, int thisRegister) {
     // start I2C transmission
     Wire.beginTransmission(address);
     // send address to read from
@@ -61,13 +51,12 @@ void SonarSRF08::setRegister(int address, int thisRegister){
 }
 
 // Read data from register return result
-
-int SonarSRF08::readData(int address, int numBytes){
+int SonarSRF08::readData(int address, int numBytes) {
     int result = 0; // the result is two bytes long
     // send I2C request for data
     Wire.requestFrom(address, numBytes);
     // wait for two bytes to return
-    while (Wire.available() < 2)   {
+    while (Wire.available() < 2) {
         // wait for result
     }
     // read the two bytes, and combine them into one int
@@ -77,4 +66,3 @@ int SonarSRF08::readData(int address, int numBytes){
     // return the result:
     return result;
 }
-

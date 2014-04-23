@@ -1,17 +1,19 @@
-/*
-    SonarSRF02.cpp - SRF02 sensor reader code
-        By Zach Foresta Apr 2009
-        By Leo Colomb May 2012
-        By Philipp A. Mohrenweiser Okt 08 2012
-*/
+//
+// SonarSRF
+// Arduino Library for controlling SRF sonar sensors
+// http://www.arduino.cc/playground/Main/SonarSrf08
+//
+// MIT License
+// Copyright(c) 2009 Zach Foresta
+// Copyright(c) 2012 Leo Colombaro
+// Copyright(c) 2012 Philipp A. Mohrenweiser
+//
 
 #include "SonarSRF02.h"
 #include <Arduino.h>
 
-/**
- * Completion wait on 02 takes 66ms, 
- * std way to check register 0 doesnt seem to work with software revision 6
- */
-void SonarSRF02::waitForCompletion(){
+void SonarSRF02::waitForCompletion() {
     delay(66);
+    // Completion wait on 02 takes 66ms,
+    // std way to check register 0 doesnt seem to work with software revision 6
 }
