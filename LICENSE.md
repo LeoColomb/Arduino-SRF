@@ -1,6 +1,8 @@
 The MIT License (MIT)
 
-Copyright (c) 2014 Leo Colombaro
+Copyright(c) 2009 Zach Foresta
+Copyright(c) 2012 Leo Colombaro
+Copyright(c) 2012 Philipp A. Mohrenweiser
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
