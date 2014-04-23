@@ -1,15 +1,12 @@
-/*
-* SRF08.ino - example interfacing with sonar sensor SRF08
-*	library uses Wire.h 
-*		SDA - Analog Pin 4
-*		SCL - Analog Pin 5
-*
-* Authors:
-*	- Zach Foresta - Foureza87@yahoo.com (April 2009)
-*	- Leo Colomb - @LeoColomb (May 2012)
-*
-* For component setup - http://www.arduino.cc/playground/Main/SonarSrf08
-*/
+//
+// SonarSRF08.h
+// Library for controlling SRF08 sonar sensors
+// http://www.arduino.cc/playground/Main/SonarSrf08
+//
+// MIT License
+// Copyright(c) 2009 Zach Foresta
+// Copyright(c) 2012 Leo Colombaro
+//
 
 #include <Wire.h>
 #include <SonarSRF08.h>
