@@ -1,22 +1,22 @@
 #######################################
-# Syntax Coloring Map For SRF08
+# Syntax Coloring Map For SonarSRF
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
 
+SonarSRF02	KEYWORD1
 SonarSRF08	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-connect	KEYWORD2
-sendCommand	KEYWORD2
-setUnit	KEYWORD2
-setRegister	KEYWORD2
-readData	KEYWORD2
+connect	        KEYWORD2
+startRanging	KEYWORD2
+getRange	    KEYWORD2
+getSoft	        KEYWORD2
 changeAddress	KEYWORD2
 
 #######################################
