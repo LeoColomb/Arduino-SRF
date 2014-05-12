@@ -53,25 +53,22 @@ int SonarSRF::getCommand(char units) {
 
 // Read data from register return result
 int SonarSRF::getRange(char unit, bool andStart) {
-    if (andStart == true) {
+    if (andStart) {
         startRanging(unit);
         waitForCompletion();
     }
 
-    int result = 0; // the result is two bytes long
     // send I2C request for data
-
     Wire.beginTransmission(_address); // start communicating with SRFmodule
     Wire.write(ResultRegister); // Call the register for start of ranging data
     Wire.endTransmission();
     Wire.requestFrom(_address, 2);
     // wait for two bytes to return
-    int i = 0;
     while (Wire.available() < 2) {
         delay(1);
     }
     // read the two bytes, and combine them into one int
-    result = Wire.read() * 256;
+    int result = Wire.read() * 256;
     result += Wire.read();
     // return the result:
     return result;
@@ -79,8 +76,7 @@ int SonarSRF::getRange(char unit, bool andStart) {
 
 void SonarSRF::waitForCompletion() {
     int result = -1;
-    while (result == -1)
-    {
+    while (result == -1) {
         result = getSoft();
         delay(2);
     }
