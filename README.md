@@ -1,5 +1,7 @@
 Arduino library for SRF0X
 =========================
+[![Latest Release](http://img.shields.io/github/release/LeoColomb/Arduino-SRF.svg?style=flat)](https://github.com/LeoColomb/Arduino-SRF/releases)
+[![Build for Arduino](http://img.shields.io/badge/build%20for-arduino-00979c.svg?style=flat)](http://arduino.cc/)
 
 This lib wants to give a quick shot on differences for usage of SRF 02 and 08 atm.
 You can easily use it like in the example
