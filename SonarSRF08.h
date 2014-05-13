@@ -14,9 +14,8 @@
 
 #include "SonarSRF.h"
 
-class SonarSRF08 : public SonarSRF {
-public:
-    void startRanging(char unit);
+class SonarSRF08 : public SonarSRF
+{
 };
 
 #endif

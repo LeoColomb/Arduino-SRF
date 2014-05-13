@@ -19,24 +19,27 @@
 #include <Wire.h>
 #include <Arduino.h>
 
-#define readInches       0x50
-#define readCentimeters  0x51
-#define readMicroSeconds 0x52
-#define CommandRegister  0x00
-#define ResultRegister   0x02
+#define INCHES           0x50
+#define CENTIMETERS      0x51
+#define MICROSECONDS     0x52
+#define COMMAND_REGISTER 0x00
+#define RESULT_REGISTER  0x02
 
-class SonarSRF {
+class SonarSRF
+{
 public:
-    void         connect(int address);
+    void         connect(int address, int gainRegister = NULL, int rangeLocation = NULL);
     virtual void startRanging(char unit);
-    virtual int  getRange(char unit, bool andStart = true);
+    virtual int  getRange(char unit = ' ', bool andStart = true);
     int          getSoft();
-    void         changeAddress(int NEW_ADDRESS);
+    void         changeAddress(int newAddress);
+
 protected:
-    int          getCommand(char unit);
     virtual void waitForCompletion();
-    void         sendBasicCommand(int command);
+    void         sendCommand(int command = NULL, int addressRegister = COMMAND_REGISTER);
     int          _address;
+    int          _gainRegister;
+    int          _rangeLocation;
 };
 
 #endif

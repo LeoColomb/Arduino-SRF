@@ -14,7 +14,8 @@
 
 #include "SonarSRF.h"
 
-class SonarSRF02 : public SonarSRF {
+class SonarSRF02 : public SonarSRF
+{
 public:
     void waitForCompletion();
 };

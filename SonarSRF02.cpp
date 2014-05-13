@@ -10,9 +10,9 @@
 //
 
 #include "SonarSRF02.h"
-#include <Arduino.h>
 
-void SonarSRF02::waitForCompletion() {
+void SonarSRF02::waitForCompletion()
+{
     delay(66);
     // Completion wait on 02 takes 66ms,
     // std way to check register 0 doesnt seem to work with software revision 6
