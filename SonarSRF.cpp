@@ -51,13 +51,10 @@ void SonarSRF::sendCommand(int command, int addressRegister)
     {
         Wire.write(command); // SRF Command
     }
-    if (_gainRegister)
+    if (_gainRegister && _rangeLocation)
     {
-        Wire.write(_gainRegister);
-    }
-    if (_rangeLocation)
-    {
-        Wire.write(_rangeLocation);
+        Wire.write(_gainRegister); // SRF Location 1
+        Wire.write(_rangeLocation); // SRF Location 2
     }
     // end I2C transmission
     Wire.endTransmission();

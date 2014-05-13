@@ -17,19 +17,26 @@
 #define MAIN_08_ADDRESS (0xF8 >> 1)
 SonarSRF08 MainSonar;
 
+// Setup Analogue Gain
+// http://www.robot-electronics.co.uk/htm/srf08tech.html section "Analogue Gain"
+#define GAIN_REGISTER 0x00
+// Setup Range Location
+// http://www.robot-electronics.co.uk/htm/srf08tech.html section "Changing the Range"
+#define LOCATION_REGISTER 0x00
+
 char unit = 'c'; // 'i' for inches, 'c' for centimeters, 'm' for micro-seconds
 
 void setup() {
     Serial.begin(9600);
 
-    MainSonar.connect(MAIN_08_ADDRESS);
+    MainSonar.connect(MAIN_08_ADDRESS, GAIN_REGISTER, LOCATION_REGISTER);
     isConnected("SRF08", MainSonar.getSoft());
 }
 
 void loop() {
     float sensorReading = 0;
     sensorReading = MainSonar.getRange(unit);
-    distance("main", sensorReading);
+    distance("sensor", sensorReading);
 }
 
 // Print out distance
@@ -37,8 +44,7 @@ void distance(String reference, int sensorReading) {
     Serial.print("Distance from " + reference + ": ");
     Serial.print(sensorReading);
     Serial.print(" ");
-    Serial.print(unit);
-    Serial.println();
+    Serial.println(unit);
 }
 
 // Print out distance
