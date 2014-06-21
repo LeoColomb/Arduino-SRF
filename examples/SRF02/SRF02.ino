@@ -14,7 +14,6 @@
 
 #define LEFT_02_ADDRESS (0xF2 >> 1)
 #define RIGHT_02_ADDRESS (0xE0 >> 1)
-#define MAIN_08_ADDRESS (0xF8 >> 1)
 SonarSRF02 LeftSonar;
 SonarSRF02 RightSonar;
 
@@ -44,7 +43,6 @@ void loop() {
 void distance(String reference, int sensorReading) {
     Serial.print("Distance from " + reference + ": ");
     Serial.print(sensorReading);
-    Serial.print(" ");
     Serial.print(unit);
     Serial.println();
 }

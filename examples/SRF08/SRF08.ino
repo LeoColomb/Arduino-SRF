@@ -12,17 +12,15 @@
 #include <Wire.h>
 #include <SonarSRF08.h>
 
-#define LEFT_02_ADDRESS (0xF2 >> 1)
-#define RIGHT_02_ADDRESS (0xE0 >> 1)
 #define MAIN_08_ADDRESS (0xF8 >> 1)
 SonarSRF08 MainSonar;
 
 // Setup Analogue Gain
 // http://www.robot-electronics.co.uk/htm/srf08tech.html section "Analogue Gain"
-#define GAIN_REGISTER 0x00
+#define GAIN_REGISTER 0x09
 // Setup Range Location
 // http://www.robot-electronics.co.uk/htm/srf08tech.html section "Changing the Range"
-#define LOCATION_REGISTER 0x00
+#define LOCATION_REGISTER 0x8C
 
 char unit = 'c'; // 'i' for inches, 'c' for centimeters, 'm' for micro-seconds
 
@@ -43,7 +41,6 @@ void loop() {
 void distance(String reference, int sensorReading) {
     Serial.print("Distance from " + reference + ": ");
     Serial.print(sensorReading);
-    Serial.print(" ");
     Serial.println(unit);
 }
 
