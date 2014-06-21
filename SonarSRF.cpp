@@ -47,14 +47,14 @@ void SonarSRF::sendCommand(int command, int addressRegister)
     Wire.beginTransmission(_address);
     // send command
     Wire.write(addressRegister); // SRF Location 0
-    if (command)
+    if (command != NULL)
     {
         Wire.write(command); // SRF Command
-    }
-    if (_gainRegister && _rangeLocation)
-    {
-        Wire.write(_gainRegister); // SRF Location 1
-        Wire.write(_rangeLocation); // SRF Location 2
+        if (_gainRegister && _rangeLocation)
+        {
+            Wire.write(_gainRegister); // SRF Location 1
+            Wire.write(_rangeLocation); // SRF Location 2
+        }
     }
     // end I2C transmission
     Wire.endTransmission();
@@ -63,6 +63,7 @@ void SonarSRF::sendCommand(int command, int addressRegister)
 // Read data from register return result
 int SonarSRF::getRange(char unit, bool andStart)
 {
+    int result = 0; // the result is two bytes long
     if (andStart)
     {
         startRanging(unit);
@@ -71,24 +72,20 @@ int SonarSRF::getRange(char unit, bool andStart)
     sendCommand(NULL, RESULT_REGISTER);
     Wire.requestFrom(_address, 2);
     // wait for two bytes to return
-    while (Wire.available() < 2)
-    {
-        delay(1);
-    }
+    while (Wire.available() < 2); // wait for result
     // read the two bytes, and combine them into one int
-    int result = Wire.read() * 256;
-    result += Wire.read();
+    byte highByte = Wire.read(); // Stores high byte from ranging
+    byte lowByte = Wire.read(); // Stored low byte from ranging
+    result = (highByte << 8) + lowByte;
     // return the result:
     return result;
 }
 
 void SonarSRF::waitForCompletion()
 {
-    int result = -1;
-    while (result == -1)
+    while (getSoft() == -1)
     {
-        result = getSoft();
-        delay(2);
+        delay(1);
     }
 }
 
