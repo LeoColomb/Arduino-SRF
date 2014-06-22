@@ -27,7 +27,4 @@ Due | 20 (SDA), 21 (SCL), SDA1, SCL1
 
 License
 -------
-The MIT License (MIT)
-* 2009 Zach Foresta
-* 2012 Leo Colombaro
-* 2012 Philipp A. Mohrenweise
+Project licensed under the [MIT License](LICENSE).
