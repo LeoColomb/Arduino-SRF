@@ -34,12 +34,11 @@
 class SonarSRF
 {
 public:
-    void         SonarSRF(int address, int gainRegister = NULL, int rangeLocation = NULL);
+    void         begin(int address, int gainRegister = NULL, int rangeLocation = NULL);
     virtual void startRanging(char unit);
     virtual int  getRange(char unit = 'c', bool andStart = true);
     int          getVersion();
     void         setAddress(int newAddress);
-
 protected:
     virtual void waitForCompletion();
     void         sendCommand(int command = NULL, int addressRegister = COMMAND_REGISTER);

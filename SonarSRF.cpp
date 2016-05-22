@@ -12,12 +12,12 @@
 #include "SonarSRF.h"
 
 /// <summary>
-/// Initiates the connection to the sensor and start I2C bus
+/// Initiates the connection with the sensor and start I2C bus
 /// </summary>
 /// <param name="address">I2C Address</param>
 /// <param name="gainRegister">SRF Location 1</param>
 /// <param name="rangeLocation">SRF Location 2</param>
-void SonarSRF::SonarSRF(int address, int gainRegister, int rangeLocation)
+void SonarSRF::begin(int address, int gainRegister, int rangeLocation)
 {
     _address = address;
     _gainRegister = gainRegister;
