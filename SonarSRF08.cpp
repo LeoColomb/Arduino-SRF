@@ -9,7 +9,7 @@
 // Copyright(c) 2012-2016 Leo Colombaro
 //
 
-#include "SonarSRF02.h"
+#include "SonarSRF08.h"
 
 /// <summary>
 /// Get luminosity captured by SRF08 sensor
