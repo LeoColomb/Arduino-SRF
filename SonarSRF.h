@@ -5,7 +5,7 @@
 //
 // MIT License
 // Copyright(c) 2009 Zach Foresta
-// Copyright(c) 2012 Leo Colombaro
+// Copyright(c) 2012-2016 Leo Colombaro
 // Copyright(c) 2012 Philipp A. Mohrenweiser
 //
 
@@ -28,11 +28,11 @@
 class SonarSRF
 {
 public:
-    void         connect(int address, int gainRegister = NULL, int rangeLocation = NULL);
+    void         SonarSRF(int address, int gainRegister = NULL, int rangeLocation = NULL);
     virtual void startRanging(char unit);
     virtual int  getRange(char unit = 'c', bool andStart = true);
-    int          getSoft();
-    void         changeAddress(int newAddress);
+    int          getVersion();
+    void         setAddress(int newAddress);
 
 protected:
     virtual void waitForCompletion();

@@ -5,22 +5,35 @@
 //
 // MIT License
 // Copyright(c) 2009 Zach Foresta
-// Copyright(c) 2012 Leo Colombaro
 // Copyright(c) 2012 Philipp A. Mohrenweiser
+// Copyright(c) 2012-2016 Leo Colombaro
 //
 
 #include "SonarSRF.h"
 
-void SonarSRF::connect(int address, int gainRegister, int rangeLocation)
+/// <summary>
+/// Initiates the connection to the sensor and start I2C bus
+/// </summary>
+/// <param name="address">I2C Address</param>
+/// <param name="gainRegister">SRF Location 1</param>
+/// <param name="rangeLocation">SRF Location 2</param>
+void SonarSRF::SonarSRF(int address, int gainRegister, int rangeLocation)
 {
     _address = address;
     _gainRegister = gainRegister;
     _rangeLocation = rangeLocation;
-    // start I2C bus
     Wire.begin();
 }
 
-// Sets Units for display / storage
+/// <summary>
+/// Sets Units for display / storage
+/// </summary>
+/// <remarks>
+/// * 'i' for inches
+/// * 'c' for centimeters
+/// * 'm' for microseconds
+/// </remarks>
+/// <param name="unit">Unit used</param>
 void SonarSRF::startRanging(char unit)
 {
     switch (unit)
@@ -40,16 +53,21 @@ void SonarSRF::startRanging(char unit)
     }
 }
 
-// Communicates with Sonar to send commands
+/// <summary>
+/// Communicates with Sonar to send commands
+/// </summary>
+/// <param name="command">SRF Command</param>
+/// <param name="addressRegister">SRF Location 0</param>
+/// <seealso cref="connect"/>
 void SonarSRF::sendCommand(int command, int addressRegister)
 {
     // start I2C transmission
     Wire.beginTransmission(_address);
     // send command
-    Wire.write(addressRegister); // SRF Location 0
+    Wire.write(addressRegister);
     if (command != NULL)
     {
-        Wire.write(command); // SRF Command
+        Wire.write(command);
         if (_gainRegister && _rangeLocation)
         {
             Wire.write(_gainRegister); // SRF Location 1
@@ -60,7 +78,13 @@ void SonarSRF::sendCommand(int command, int addressRegister)
     Wire.endTransmission();
 }
 
-// Read data from register return result
+/// <summary>
+/// Read data from register return result
+/// </summary>
+/// <param name="unit">Unit used</param>
+/// <param name="andStart"></param>
+/// <returns>The range number (two bytes)</returns>
+/// <seealso cref="startRanging"/>
 int SonarSRF::getRange(char unit, bool andStart)
 {
     int result = 0; // the result is two bytes long
@@ -77,20 +101,25 @@ int SonarSRF::getRange(char unit, bool andStart)
     byte highByte = Wire.read(); // Stores high byte from ranging
     byte lowByte = Wire.read(); // Stored low byte from ranging
     result = (highByte << 8) + lowByte;
-    // return the result:
     return result;
 }
 
+/// <summary>
+/// Wait for completion
+/// </summary>
 void SonarSRF::waitForCompletion()
 {
-    while (getSoft() == -1)
+    while (getVersion() == -1)
     {
         delay(1);
     }
 }
 
-// Get software revision
-int SonarSRF::getSoft()
+/// <summary>
+/// Get software revision
+/// </summary>
+/// <returns>The software revision (one byte)</returns>
+int SonarSRF::getVersion()
 {
     sendCommand();
     Wire.requestFrom(_address, 1); // Request 1 byte
@@ -99,11 +128,17 @@ int SonarSRF::getSoft()
     return software;
 }
 
-void SonarSRF::changeAddress(int newAddress)
+/// <summary>
+/// Set a new address
+/// </summary>
+/// <remarks>
+/// The address given in Arduino 7bit has to be converted back into SRF 8bit
+/// newAddress << 1 can be set to any of E0, E2, E4, E6, E8, EA, EC, EE, F0, F2,
+/// F4, F6, F8, FA, FC, FE.
+/// </remarks>
+/// <param name="newAddress">The new address</param>
+void SonarSRF::setAddress(int newAddress)
 {
-    // The address given in Arduino 7bit has to be converted back into SRF 8bit
-    // newAddress << 1 can be set to any of E0, E2, E4, E6, E8, EA, EC, EE
-    // F0, F2, F4, F6, F8, FA, FC, FE
     sendCommand(0xA0);
     sendCommand(0xAA);
     sendCommand(0xA5);

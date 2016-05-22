@@ -5,7 +5,7 @@
 //
 // MIT License
 // Copyright(c) 2009 Zach Foresta
-// Copyright(c) 2012 Leo Colombaro
+// Copyright(c) 2012-2016 Leo Colombaro
 // Copyright(c) 2012 Philipp A. Mohrenweiser
 //
 
