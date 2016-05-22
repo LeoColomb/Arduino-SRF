@@ -87,7 +87,6 @@ void SonarSRF::sendCommand(int command, int addressRegister)
 /// <seealso cref="startRanging"/>
 int SonarSRF::getRange(char unit, bool andStart)
 {
-    int result = 0; // the result is two bytes long
     if (andStart)
     {
         startRanging(unit);
@@ -100,8 +99,7 @@ int SonarSRF::getRange(char unit, bool andStart)
     // read the two bytes, and combine them into one int
     byte highByte = Wire.read(); // Stores high byte from ranging
     byte lowByte = Wire.read(); // Stored low byte from ranging
-    result = (highByte << 8) + lowByte;
-    return result;
+    return (int)((highByte << 8) + lowByte);
 }
 
 /// <summary>
@@ -124,8 +122,7 @@ int SonarSRF::getVersion()
     sendCommand();
     Wire.requestFrom(_address, 1); // Request 1 byte
     while (Wire.available() < 0); // While byte available
-    int software = Wire.read(); // Get byte
-    return software;
+    return (int)(Wire.read());
 }
 
 /// <summary>
