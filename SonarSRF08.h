@@ -5,8 +5,8 @@
 //
 // MIT License
 // Copyright(c) 2009 Zach Foresta
-// Copyright(c) 2012-2016 Leo Colombaro
 // Copyright(c) 2012 Philipp A. Mohrenweiser
+// Copyright(c) 2012-2016 Leo Colombaro
 //
 
 #ifndef SonarSRF08_h
@@ -16,6 +16,8 @@
 
 class SonarSRF08 : public SonarSRF
 {
+public:
+    int SonarSRF08::getLuminosity();
 };
 
 #endif
