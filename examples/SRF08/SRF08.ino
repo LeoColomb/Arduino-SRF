@@ -5,8 +5,8 @@
 //
 // MIT License
 // Copyright(c) 2009 Zach Foresta
-// Copyright(c) 2012 Leo Colombaro
 // Copyright(c) 2012 Philipp A. Mohrenweiser
+// Copyright(c) 2012-2016 Leo Colombaro
 //
 
 #include <Wire.h>
@@ -27,8 +27,8 @@ char unit = 'c'; // 'i' for inches, 'c' for centimeters, 'm' for micro-seconds
 void setup() {
     Serial.begin(9600);
 
-    MainSonar.connect(MAIN_08_ADDRESS, GAIN_REGISTER, LOCATION_REGISTER);
-    isConnected("SRF08", MainSonar.getSoft());
+    MainSonar.begin(MAIN_08_ADDRESS, GAIN_REGISTER, LOCATION_REGISTER);
+    isConnected("SRF08", MainSonar.getVersion());
 }
 
 void loop() {
