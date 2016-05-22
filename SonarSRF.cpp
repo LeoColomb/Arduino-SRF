@@ -92,7 +92,7 @@ int SonarSRF::getRange(char unit, bool andStart)
         startRanging(unit);
         waitForCompletion();
     }
-    sendCommand(NULL, RESULT_REGISTER);
+    sendCommand(NULL, RANGE_REGISTER);
     Wire.requestFrom(_address, 2);
     // wait for two bytes to return
     while (Wire.available() < 2); // wait for result
@@ -119,7 +119,7 @@ void SonarSRF::waitForCompletion()
 /// <returns>The software revision (one byte)</returns>
 int SonarSRF::getVersion()
 {
-    sendCommand();
+    sendCommand(NULL, SOFTWARE_REVISION);
     Wire.requestFrom(_address, 1); // Request 1 byte
     while (Wire.available() < 0); // While byte available
     return (int)(Wire.read());
