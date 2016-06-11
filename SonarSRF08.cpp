@@ -20,7 +20,7 @@ int SonarSRF08::getLuminosity()
     startRanging('i');
     delay(70);
 
-    sendCommand(NULL, LIGHT_SENSOR);
+    sendCommand(0, LIGHT_SENSOR);
     Wire.requestFrom(_address, 1);
     while (Wire.available() < 0); // While byte available
     return (int)(Wire.read());

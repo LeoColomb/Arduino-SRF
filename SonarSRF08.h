@@ -17,7 +17,7 @@
 class SonarSRF08 : public SonarSRF
 {
 public:
-    int SonarSRF08::getLuminosity();
+    int getLuminosity();
 };
 
 #endif

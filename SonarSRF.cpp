@@ -64,7 +64,7 @@ void SonarSRF::sendCommand(int command, int addressRegister)
     // start I2C transmission
     Wire.beginTransmission(_address);
     Wire.write(byte(addressRegister));
-    if (command != NULL)
+    if (command != 0)
     {
         // send command
         Wire.write(byte(command));
@@ -92,7 +92,7 @@ int SonarSRF::getRange(char unit, bool andStart)
         startRanging(unit);
         waitForCompletion();
     }
-    sendCommand(NULL, RANGE_REGISTER);
+    sendCommand(0, RANGE_REGISTER);
     Wire.requestFrom(_address, 2);
     // wait for two bytes to return
     while (Wire.available() < 2); // wait for result
@@ -119,7 +119,7 @@ void SonarSRF::waitForCompletion()
 /// <returns>The software revision (one byte)</returns>
 int SonarSRF::getVersion()
 {
-    sendCommand(NULL, SOFTWARE_REVISION);
+    sendCommand(0, SOFTWARE_REVISION);
     Wire.requestFrom(_address, 1); // Request 1 byte
     while (Wire.available() < 0); // While byte available
     return (int)(Wire.read());
@@ -130,7 +130,7 @@ int SonarSRF::getVersion()
 /// </summary>
 /// <remarks>
 /// The address given in Arduino 7bit has to be converted back into SRF 8bit
-/// newAddress << 1 can be set to any of E0, E2, E4, E6, E8, EA, EC, EE, F0, F2,
+/// newAddress can be set to any of E0, E2, E4, E6, E8, EA, EC, EE, F0, F2,
 /// F4, F6, F8, FA, FC, FE.
 /// </remarks>
 /// <param name="newAddress">The new address</param>
