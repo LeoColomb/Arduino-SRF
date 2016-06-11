@@ -13,11 +13,12 @@ SonarSRF08	KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 
-connect	KEYWORD2
+begin	KEYWORD2
 startRanging	KEYWORD2
 getRange	KEYWORD2
-getSoft	KEYWORD2
-changeAddress	KEYWORD2
+getVersion	KEYWORD2
+setAddress	KEYWORD2
+getLuminosity	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

@@ -5,8 +5,8 @@
 //
 // MIT License
 // Copyright(c) 2009 Zach Foresta
-// Copyright(c) 2012 Leo Colombaro
 // Copyright(c) 2012 Philipp A. Mohrenweiser
+// Copyright(c) 2012-2016 Leo Colombaro
 //
 
 #include <Wire.h>
@@ -22,11 +22,11 @@ char unit = 'c'; // 'i' for inches, 'c' for centimeters, 'm' for micro-seconds
 void setup() {
     Serial.begin(115200);
 
-    LeftSonar.connect(LEFT_02_ADDRESS);
-    isConnected("SRF02-left", LeftSonar.getSoft());
+    LeftSonar.begin(LEFT_02_ADDRESS);
+    isConnected("SRF02-left", LeftSonar.getVersion());
 
-    RightSonar.connect(RIGHT_02_ADDRESS);
-    isConnected("SRF02-right", RightSonar.getSoft());
+    RightSonar.begin(RIGHT_02_ADDRESS);
+    isConnected("SRF02-right", RightSonar.getVersion());
 }
 
 void loop() {
