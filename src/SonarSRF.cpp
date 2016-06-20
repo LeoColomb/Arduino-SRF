@@ -39,7 +39,7 @@ void SonarSRF::begin(void)
 /// <param name="command">SRF Command</param>
 /// <param name="addressRegister">SRF Location 0</param>
 /// <seealso cref="connect"/>
-void SonarSRF::writeCommand(unsigned int command, int addressRegister)
+void SonarSRF::write(unsigned int command, unsigned int addressRegister)
 {
     Wire.beginTransmission(_address); // Start I2C transmission
     Wire.write((uint8_t)(addressRegister));
@@ -69,17 +69,17 @@ void SonarSRF::writeUnit(char unit)
     switch (unit)
     {
     case 'i':
-        writeCommand(INCHES);
+        write(INCHES);
         break;
     case 'c':
-        writeCommand(CENTIMETERS);
+        write(CENTIMETERS);
         break;
     case 'm':
-        writeCommand(MICROSECONDS);
+        write(MICROSECONDS);
         break;
     default:
         Serial.println("Invalid units entered... using micro-seconds");
-        writeCommand(MICROSECONDS);
+        write(MICROSECONDS);
     }
 }
 
@@ -92,12 +92,31 @@ void SonarSRF::writeUnit(char unit)
 /// F4, F6, F8, FA, FC, FE.
 /// </remarks>
 /// <param name="newAddress">The new address</param>
-void SonarSRF::writeAddress(int newAddress)
+void SonarSRF::writeAddress(unsigned int newAddress)
 {
-    writeCommand(0xA0);
-    writeCommand(0xAA);
-    writeCommand(0xA5);
-    writeCommand(newAddress << 1);
+    write(0xA0);
+    write(0xAA);
+    write(0xA5);
+    write(newAddress << 1);
+}
+
+/// <summary>
+/// Read data from a command
+/// </summary>
+/// <param name="command">Reading operation command</param>
+/// <param name="length">Expected length of the data</param>
+unsigned int SonarSRF::read(unsigned int command, unsigned int length)
+{
+    write(0x00, command);
+    Wire.requestFrom(_address, (uint8_t)(length)); // Request length bytes
+    while (Wire.available() < length); // Wait for result while bytes available
+    unsigned int res; // Read the bytes, and combine them into one int
+    for (length; length > 0; length--)
+    {
+        res += Wire.read() << (8 * (length - 1));
+    }
+
+    return res;
 }
 
 /// <summary>
@@ -115,7 +134,7 @@ unsigned int SonarSRF::readRange(char unit, bool andStart)
         waitForCompletion();
     }
 
-    return readCommand(RANGE_REGISTER, 2);
+    return read(RANGE_REGISTER, 2);
 }
 
 /// <summary>
@@ -124,7 +143,7 @@ unsigned int SonarSRF::readRange(char unit, bool andStart)
 /// <returns>The software revision (one byte)</returns>
 unsigned int SonarSRF::readVersion(void)
 {
-    return readCommand(SOFTWARE_REVISION, 1);
+    return read(SOFTWARE_REVISION, 1);
 }
 
 /// <summary>
@@ -136,23 +155,4 @@ void SonarSRF::waitForCompletion(void)
     {
         delay(1);
     }
-}
-
-/// <summary>
-/// Read data from a command
-/// </summary>
-/// <param name="">Command</param>
-/// <param name="length">Expected length of the data</param>
-unsigned int SonarSRF::readCommand(int command, unsigned int length)
-{
-    writeCommand(0, command);
-    Wire.requestFrom(_address, (uint8_t)(length)); // Request length bytes
-    while (Wire.available() < length); // Wait for result while bytes available
-    unsigned int res; // Read the bytes, and combine them into one int
-    for (length; length > 0; length--)
-    {
-        res += Wire.read() << (8 * (length - 1));
-    }
-
-    return res;
 }

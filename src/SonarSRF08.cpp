@@ -20,5 +20,5 @@ unsigned int SonarSRF08::readLuminosity(void)
     writeUnit('i');
     delay(70);
 
-    return readCommand(LIGHT_SENSOR, 1);
+    return read(LIGHT_SENSOR, 1);
 }

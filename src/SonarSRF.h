@@ -36,17 +36,17 @@ private:
     uint8_t _address;
     uint8_t _gainRegister;
     uint8_t _rangeLocation;
-    void writeCommand(unsigned int command = 0, int addressRegister = COMMAND_REGISTER);
 public:
     SonarSRF(int address, int gainRegister = 0, int rangeLocation = 0);
     void begin(void);
-    void writeUnit(char unit);
-    void writeAddress(int newAddress);
+    void writeAddress(unsigned int newAddress);
     unsigned int readRange(char unit = 'c', bool andStart = true);
     unsigned int readVersion(void);
 protected:
+    void write(unsigned int command, unsigned int addressRegister = COMMAND_REGISTER);
+    void writeUnit(char unit);
+    unsigned int read(unsigned int command, unsigned int length);
     virtual void waitForCompletion(void);
-    unsigned int readCommand(unsigned int command, unsigned int length);
 };
 
 #endif // SONARSRF_H
