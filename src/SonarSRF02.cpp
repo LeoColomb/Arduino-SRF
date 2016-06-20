@@ -18,7 +18,7 @@
 /// Completion wait on SRF02 takes 66ms, std way to check register 0 doesn't
 /// seem to work with software revision 6.
 /// </remarks>
-void SonarSRF02::waitForCompletion()
+void SonarSRF02::waitForCompletion(void)
 {
     delay(66);
 }

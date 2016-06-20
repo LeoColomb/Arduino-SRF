@@ -16,7 +16,6 @@
 #ifndef SONARSRF_H
 #define SONARSRF_H
 
-#include <Wire.h>
 #include <Arduino.h>
 
 // Read
@@ -33,18 +32,21 @@
 
 class SonarSRF
 {
+private:
+    uint8_t _address;
+    uint8_t _gainRegister;
+    uint8_t _rangeLocation;
+    void writeCommand(unsigned int command = 0, int addressRegister = COMMAND_REGISTER);
 public:
-    void         begin(int address, int gainRegister = 0, int rangeLocation = 0);
-    virtual void startRanging(char unit);
-    virtual int  getRange(char unit = 'c', bool andStart = true);
-    int          getVersion();
-    void         setAddress(int newAddress);
+    SonarSRF(int address, int gainRegister = 0, int rangeLocation = 0);
+    void begin(void);
+    void writeUnit(char unit);
+    void writeAddress(int newAddress);
+    unsigned int readRange(char unit = 'c', bool andStart = true);
+    unsigned int readVersion(void);
 protected:
-    virtual void waitForCompletion();
-    void         sendCommand(int command = 0, int addressRegister = COMMAND_REGISTER);
-    int          _address;
-    int          _gainRegister;
-    int          _rangeLocation;
+    virtual void waitForCompletion(void);
+    unsigned int readCommand(unsigned int command, unsigned int length);
 };
 
 #endif // SONARSRF_H

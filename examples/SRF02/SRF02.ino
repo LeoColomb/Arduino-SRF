@@ -1,5 +1,5 @@
 //
-// SonarSRF
+// SonarSRF02
 // Arduino Library for controlling SRF sonar sensors
 // http://www.arduino.cc/playground/Main/SonarSrf08
 //
@@ -14,49 +14,53 @@
 
 #define LEFT_02_ADDRESS (0xF2 >> 1)
 #define RIGHT_02_ADDRESS (0xE0 >> 1)
-SonarSRF02 LeftSonar;
-SonarSRF02 RightSonar;
+SonarSRF02 LeftSonar(LEFT_02_ADDRESS);
+SonarSRF02 RightSonar(RIGHT_02_ADDRESS);
 
 char unit = 'c'; // 'i' for inches, 'c' for centimeters, 'm' for micro-seconds
 
-void setup() {
-    Serial.begin(115200);
+void setup()
+{
+  Serial.begin(115200);
 
-    LeftSonar.begin(LEFT_02_ADDRESS);
-    isConnected("SRF02-left", LeftSonar.getVersion());
+  LeftSonar.begin();
+  isConnected("SRF02-left", LeftSonar.readVersion());
 
-    RightSonar.begin(RIGHT_02_ADDRESS);
-    isConnected("SRF02-right", RightSonar.getVersion());
+  RightSonar.begin();
+  isConnected("SRF02-right", RightSonar.readVersion());
 }
 
-void loop() {
-    float sensorReading = 0;
+void loop()
+{
+  int sensorReading = 0;
 
-    sensorReading = LeftSonar.getRange(unit);
-    distance("left", sensorReading);
+  sensorReading = LeftSonar.readRange(unit);
+  distance("left", sensorReading);
 
-    sensorReading = RightSonar.getRange(unit);
-    distance("right", sensorReading);
-}
-
-// Print out distance
-void distance(String reference, int sensorReading) {
-    Serial.print("Distance from " + reference + ": ");
-    Serial.print(sensorReading);
-    Serial.print(unit);
-    Serial.println();
+  sensorReading = RightSonar.readRange(unit);
+  distance("right", sensorReading);
 }
 
 // Print out distance
-void isConnected(String reference, int sensorSoft) {
-    if (sensorSoft >= 0)
-    {
-        Serial.print("Sensor " + reference + " connected (");
-        Serial.print(sensorSoft);
-        Serial.println(")");
-    }
-    else
-    {
-        Serial.println("Sensor " + reference + " not detected");
-    }
+void distance(String reference, int sensorReading)
+{
+  Serial.print("Distance from " + reference + ": ");
+  Serial.print(sensorReading);
+  Serial.print(unit);
+  Serial.println();
+}
+
+// Print out distance
+void isConnected(String reference, int sensorSoft)
+{
+  if (sensorSoft >= 0)
+  {
+    Serial.print("Sensor " + reference + " connected (");
+    Serial.print(sensorSoft);
+    Serial.println(")");
+  }
+  else
+  {
+    Serial.println("Sensor " + reference + " not detected");
+  }
 }

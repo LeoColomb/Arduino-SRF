@@ -15,13 +15,10 @@
 /// Get luminosity captured by SRF08 sensor
 /// </summary>
 /// <returns>The luminosity (one byte)</returns>
-int SonarSRF08::getLuminosity()
+unsigned int SonarSRF08::readLuminosity(void)
 {
-    startRanging('i');
+    writeUnit('i');
     delay(70);
 
-    sendCommand(0, LIGHT_SENSOR);
-    Wire.requestFrom(_address, 1);
-    while (Wire.available() < 0); // While byte available
-    return (int)(Wire.read());
+    return readCommand(LIGHT_SENSOR, 1);
 }
