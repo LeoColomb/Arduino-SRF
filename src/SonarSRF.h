@@ -13,8 +13,8 @@
 // * SDA - Analog pin 4
 // * SCL - Analog pin 5
 
-#ifndef SonarSRF_h
-#define SonarSRF_h
+#ifndef SONARSRF_H
+#define SONARSRF_H
 
 #include <Wire.h>
 #include <Arduino.h>
@@ -47,4 +47,4 @@ protected:
     int          _rangeLocation;
 };
 
-#endif
+#endif // SONARSRF_H

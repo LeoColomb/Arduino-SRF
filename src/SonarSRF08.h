@@ -9,8 +9,8 @@
 // Copyright(c) 2012-2016 Leo Colombaro
 //
 
-#ifndef SonarSRF08_h
-#define SonarSRF08_h
+#ifndef SONARSRF08_H
+#define SONARSRF08_H
 
 #include "SonarSRF.h"
 
@@ -20,4 +20,4 @@ public:
     int getLuminosity();
 };
 
-#endif
+#endif // SONARSRF08_H

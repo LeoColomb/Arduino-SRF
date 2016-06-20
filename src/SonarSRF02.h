@@ -9,8 +9,8 @@
 // Copyright(c) 2012-2016 Leo Colombaro
 //
 
-#ifndef SonarSRF02_h
-#define SonarSRF02_h
+#ifndef SONARSRF02_H
+#define SONARSRF02_H
 
 #include "SonarSRF.h"
 
@@ -20,4 +20,4 @@ public:
     void waitForCompletion();
 };
 
-#endif
+#endif // SONARSRF02_H
