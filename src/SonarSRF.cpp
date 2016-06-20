@@ -38,7 +38,6 @@ void SonarSRF::begin(void)
 /// </summary>
 /// <param name="command">SRF Command</param>
 /// <param name="addressRegister">SRF Location 0</param>
-/// <seealso cref="connect"/>
 void SonarSRF::write(unsigned int command, unsigned int addressRegister)
 {
     Wire.beginTransmission(_address); // Start I2C transmission
@@ -111,7 +110,7 @@ unsigned int SonarSRF::read(unsigned int command, unsigned int length)
     Wire.requestFrom(_address, (uint8_t)(length)); // Request length bytes
     while (Wire.available() < length); // Wait for result while bytes available
     unsigned int res; // Read the bytes, and combine them into one int
-    for (length; length > 0; length--)
+    for (; length > 0; length--)
     {
         res += Wire.read() << (8 * (length - 1));
     }
@@ -126,7 +125,7 @@ unsigned int SonarSRF::read(unsigned int command, unsigned int length)
 /// <param name="andStart"></param>
 /// <returns>The range number (two bytes)</returns>
 /// <seealso cref="writeUnit"/>
-unsigned int SonarSRF::readRange(char unit, bool andStart)
+uint16_t SonarSRF::readRange(char unit, bool andStart)
 {
     if (andStart)
     {
@@ -134,16 +133,16 @@ unsigned int SonarSRF::readRange(char unit, bool andStart)
         waitForCompletion();
     }
 
-    return read(RANGE_REGISTER, 2);
+    return (uint16_t)(read(RANGE_REGISTER, 2));
 }
 
 /// <summary>
 /// Get software revision
 /// </summary>
 /// <returns>The software revision (one byte)</returns>
-unsigned int SonarSRF::readVersion(void)
+uint8_t SonarSRF::readVersion(void)
 {
-    return read(SOFTWARE_REVISION, 1);
+    return (uint8_t)(read(SOFTWARE_REVISION, 1));
 }
 
 /// <summary>

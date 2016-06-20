@@ -19,7 +19,7 @@ class SonarSRF08 : public SonarSRF
 public:
     SonarSRF08(int address, int gainRegister = 0, int rangeLocation = 0)
         : SonarSRF(address, gainRegister, rangeLocation) {};
-    unsigned int readLuminosity(void);
+    uint8_t readLuminosity(void);
 };
 
 #endif // SONARSRF08_H

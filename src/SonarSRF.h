@@ -40,8 +40,8 @@ public:
     SonarSRF(int address, int gainRegister = 0, int rangeLocation = 0);
     void begin(void);
     void writeAddress(unsigned int newAddress);
-    unsigned int readRange(char unit = 'c', bool andStart = true);
-    unsigned int readVersion(void);
+    uint16_t readRange(char unit = 'c', bool andStart = true);
+    uint8_t readVersion(void);
 protected:
     void write(unsigned int command, unsigned int addressRegister = COMMAND_REGISTER);
     void writeUnit(char unit);

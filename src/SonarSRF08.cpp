@@ -15,10 +15,10 @@
 /// Get luminosity captured by SRF08 sensor
 /// </summary>
 /// <returns>The luminosity (one byte)</returns>
-unsigned int SonarSRF08::readLuminosity(void)
+uint8_t SonarSRF08::readLuminosity(void)
 {
     writeUnit('i');
     delay(70);
 
-    return read(LIGHT_SENSOR, 1);
+    return (uint8_t)(read(LIGHT_SENSOR, 1));
 }
