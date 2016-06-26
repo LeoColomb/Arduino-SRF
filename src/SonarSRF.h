@@ -41,11 +41,11 @@ public:
     void begin(void);
     void writeAddress(unsigned int newAddress);
     uint16_t readRange(char unit = 'c', bool andStart = true);
-    uint8_t readVersion(void);
+    int8_t readVersion(void);
 protected:
     void write(unsigned int command, unsigned int addressRegister = COMMAND_REGISTER);
     void writeUnit(char unit);
-    unsigned int read(unsigned int command, unsigned int length);
+    int read(unsigned int command, unsigned int length);
     virtual void waitForCompletion(void);
 };
 

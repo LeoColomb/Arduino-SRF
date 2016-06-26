@@ -104,12 +104,12 @@ void SonarSRF::writeAddress(unsigned int newAddress)
 /// </summary>
 /// <param name="command">Reading operation command</param>
 /// <param name="length">Expected length of the data</param>
-unsigned int SonarSRF::read(unsigned int command, unsigned int length)
+int SonarSRF::read(unsigned int command, unsigned int length)
 {
     write(0x00, command);
     Wire.requestFrom(_address, (uint8_t)(length)); // Request length bytes
     while (Wire.available() < length); // Wait for result while bytes available
-    unsigned int res; // Read the bytes, and combine them into one int
+    int res; // Read the bytes, and combine them into one int
     for (; length > 0; length--)
     {
         res += Wire.read() << (8 * (length - 1));
@@ -140,9 +140,9 @@ uint16_t SonarSRF::readRange(char unit, bool andStart)
 /// Get software revision
 /// </summary>
 /// <returns>The software revision (one byte)</returns>
-uint8_t SonarSRF::readVersion(void)
+int8_t SonarSRF::readVersion(void)
 {
-    return (uint8_t)(read(SOFTWARE_REVISION, 1));
+    return (int8_t)(read(SOFTWARE_REVISION, 1));
 }
 
 /// <summary>
