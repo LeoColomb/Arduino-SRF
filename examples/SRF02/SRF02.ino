@@ -32,13 +32,8 @@ void setup()
 
 void loop()
 {
-  int sensorReading = 0;
-
-  sensorReading = LeftSonar.readRange(unit);
-  distance("left", sensorReading);
-
-  sensorReading = RightSonar.readRange(unit);
-  distance("right", sensorReading);
+  distance("SRF02-left", LeftSonar.readRange(unit));
+  distance("SRF02-right", RightSonar.readRange(unit));
 }
 
 // Print out distance
@@ -61,6 +56,6 @@ void isConnected(String reference, int sensorSoft)
   }
   else
   {
-    Serial.println("Sensor " + reference + " not detected");
+    Serial.println("Sensor " + reference + " not detected...");
   }
 }
