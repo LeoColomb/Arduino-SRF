@@ -1,5 +1,5 @@
 //
-// SonarSRF02
+// SonarSRF10
 // Arduino Library for controlling SRF sonar sensors
 // http://www.arduino.cc/playground/Main/SonarSrf08
 //
@@ -10,30 +10,24 @@
 //
 
 #include <Wire.h>
-#include <SonarSRF02.h>
+#include <SonarSRF10.h>
 
-#define LEFT_02_ADDRESS (0xF2 >> 1)
-#define RIGHT_02_ADDRESS (0xE0 >> 1)
-SonarSRF02 LeftSonar(LEFT_02_ADDRESS);
-SonarSRF02 RightSonar(RIGHT_02_ADDRESS);
+#define MAIN_10_ADDRESS (0xF8 >> 1)
+SonarSRF10 MainSonar(MAIN_10_ADDRESS);
 
 char unit = 'c'; // 'i' for inches, 'c' for centimeters, 'm' for micro-seconds
 
 void setup()
 {
-  Serial.begin(115200);
+  Serial.begin(9600);
 
-  LeftSonar.begin();
-  isConnected("SRF02-left", LeftSonar.readVersion());
-
-  RightSonar.begin();
-  isConnected("SRF02-right", RightSonar.readVersion());
+  MainSonar.begin();
+  isConnected("SRF10", MainSonar.readVersion());
 }
 
 void loop()
 {
-  distance("SRF02-left", LeftSonar.readRange(unit));
-  distance("SRF02-right", RightSonar.readRange(unit));
+  distance("SRF10", MainSonar.readRange(unit));
 }
 
 // Print out distance
@@ -41,8 +35,7 @@ void distance(String reference, int sensorReading)
 {
   Serial.print("Distance from " + reference + ": ");
   Serial.print(sensorReading);
-  Serial.print(unit);
-  Serial.println();
+  Serial.println(unit);
 }
 
 // Print out distance

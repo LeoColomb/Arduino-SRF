@@ -6,19 +6,20 @@
 # Datatypes (KEYWORD1)
 #######################################
 
+SonarSRF	KEYWORD1
 SonarSRF02	KEYWORD1
 SonarSRF08	KEYWORD1
+SonarSRF10	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
 begin	KEYWORD2
-startRanging	KEYWORD2
-getRange	KEYWORD2
-getVersion	KEYWORD2
-setAddress	KEYWORD2
-getLuminosity	KEYWORD2
+readRange	KEYWORD2
+readVersion	KEYWORD2
+readLuminosity	KEYWORD2
+writeAddress	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

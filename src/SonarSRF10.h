@@ -9,17 +9,16 @@
 // Copyright(c) 2012-2016 Leo Colombaro
 //
 
-#ifndef SONARSRF08_H
-#define SONARSRF08_H
+#ifndef SONARSRF10_H
+#define SONARSRF10_H
 
 #include "SonarSRF.h"
 
-class SonarSRF08 : public SonarSRF
+class SonarSRF10 : public SonarSRF
 {
 public:
-    SonarSRF08(int address, int gainRegister = 0, int rangeLocation = 0)
+    SonarSRF10(int address, int gainRegister = 0, int rangeLocation = 0)
         : SonarSRF(address, gainRegister, rangeLocation) {};
-    uint8_t readLuminosity(void);
 };
 
-#endif // SONARSRF08_H
+#endif // SONARSRF10_H

@@ -9,15 +9,17 @@
 // Copyright(c) 2012-2016 Leo Colombaro
 //
 
-#ifndef SonarSRF02_h
-#define SonarSRF02_h
+#ifndef SONARSRF02_H
+#define SONARSRF02_H
 
 #include "SonarSRF.h"
 
 class SonarSRF02 : public SonarSRF
 {
 public:
-    void waitForCompletion();
+    SonarSRF02(int address, int gainRegister = 0, int rangeLocation = 0)
+        : SonarSRF(address, gainRegister, rangeLocation) {};
+    void waitForCompletion(void);
 };
 
-#endif
+#endif // SONARSRF02_H
